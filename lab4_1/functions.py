@@ -15,15 +15,19 @@ def soma_do_primeiro_e_ultimo(lista):
     return lista[0] + lista[len(lista) - 1]
 
 # exercicio 1, d)
-def soma_de_duas_listas_com_o_mesmo_indice(lista1, lista2): 
 # dúvida, receber em números inteiros ou float em functions???
+def soma_de_duas_listas_com_o_mesmo_indice(lista1, lista2): 
     if len(lista1) > len(lista2):
-        for i in range(len(lista1)):
-            return lista1[i] + lista2[i]
-    else: 
+        retorno = []
         for i in range(len(lista2)):
-            return lista1[i] + lista2[i]
-# código não realiza o qeu foi pensado, a função não executa o loop, verificar bubble_sort como exemplo.
+            retorno.append(lista1[i] + lista2[i])
+    else: 
+        retorno = []
+        for i in range(len(lista1)):
+            retorno.append(lista1[i] + lista2[i])
+    return retorno
+
+# parece estar certo
 
 
 # exercicio 1, e)
