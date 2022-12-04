@@ -7,15 +7,17 @@ def mesmo_tamanho(lista1, lista2):
 
 # exercicio 1, b)
 def valores_repetidos(lista):
+    lista_retorno = []
     nova_lista = []
-    for j in range(len(lista)):
-        for i in range(1, len(lista)):
-            if lista[j] == lista[i]:
-                nova_lista.append(lista[i])
-            
+
+    for elemento in lista:
+        if elemento not in lista_retorno:
+            lista_retorno.append(elemento)
+        else: 
+            nova_lista.append(elemento)
+
     return nova_lista
 
-# mal
 
 # exercicio 1, c)
 def soma_do_primeiro_e_ultimo(lista):
