@@ -48,14 +48,20 @@ def retornar_string(lista):
             nova_lista.append(lista[i])
     return nova_lista
 
+
 # exercicio 1, f)
-# ideia, criar um loop que remova todos os elementos, usando index, para fazer operações
 def media_dos_valores_da_lista(lista):
-    for i in range(len(lista)):
-        lista[i]
+    return sum(lista)/ len(lista)
+
+
 
 # exercicio 1, g)
-# ideia, criar um loop em que cada elemento é retirado, utilizando indexação, e devolvido como inteiros.
+def elementos_arredondados(lista):
+    nova_lista = []
+    for elemento in lista:
+        arrendondamento = int(elemento)
+        nova_lista.append(arrendondamento)
+    return nova_lista
 
 # exercicio 2
 # ideia, requisitos são meras condições, para se poder candidatar-se à vaga é preciso que todas elas sejam
