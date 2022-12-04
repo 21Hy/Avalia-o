@@ -1,3 +1,6 @@
+# Lab_4_1 main.py
+# Aluno: 30011447
+
 # exercicio 1, a)
 def mesmo_tamanho(lista1, lista2):
     if len(lista1) == len(lista2):
