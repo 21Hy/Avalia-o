@@ -59,7 +59,7 @@ def media_dos_valores_da_lista(lista):
 def elementos_arredondados(lista):
     nova_lista = []
     for elemento in lista:
-        arrendondamento = int(elemento)
+        arredondamento = int(elemento)
         nova_lista.append(arrendondamento)
     return nova_lista
 
