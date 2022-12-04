@@ -1,4 +1,4 @@
-# Lab_4_1 main.py
+# Lab_4_1 functions.py
 # Aluno: 30011447
 
 # exercicio 1, a)
