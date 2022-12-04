@@ -60,7 +60,7 @@ def elementos_arredondados(lista):
     nova_lista = []
     for elemento in lista:
         arredondamento = int(elemento)
-        nova_lista.append(arrendondamento)
+        nova_lista.append(arredondamento)
     return nova_lista
 
 # exercicio 2
