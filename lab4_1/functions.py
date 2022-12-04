@@ -41,12 +41,12 @@ def soma_de_duas_listas_com_o_mesmo_indice(lista1, lista2):
 
 
 # exercicio 1, e)
-# ideia, usar um algoritmo que retire todos os elementos da lista, usando um loop com index de itereação, 
-# para passarem por um 'check-in' de tipo de elemento, usando função type, caso sejam strings estes elementos
-# serão adicionados a outra lista vazia, utilizando a função extend.
-
-
-
+def retornar_string(lista):
+    nova_lista = []
+    for i in range(len(lista)):
+        if type(lista[i]) == str:
+            nova_lista.append(lista[i])
+    return nova_lista
 
 # exercicio 1, f)
 # ideia, criar um loop que remova todos os elementos, usando index, para fazer operações
