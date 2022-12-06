@@ -17,6 +17,12 @@ def valores_repetidos(lista):
             nova_lista.append(elemento)
     return nova_lista
 
+def remover_repetidos(lista):
+    lista_1 = []
+    for x in lista:
+        if lista.count(x)> 1 and x not in lista_1:
+     return lista_1
+
 # exercicio 1, c)
 def soma_do_primeiro_e_ultimo(lista): # dúvida, receber em números inteiros ou float em functions???
     return lista[0] + lista[len(lista) - 1]
