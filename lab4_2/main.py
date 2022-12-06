@@ -4,8 +4,6 @@
 from functions import *
 if __name__ == '__main__':
 
- 
-
     # Parte 1 - Registar jogador - 
     print('''
             --------Bem vindo ao jogo--------
@@ -17,6 +15,13 @@ if __name__ == '__main__':
     jogador2 = input('Nome do segundo jogador: ')
 
     for i in range(1, 10):
+
+
+        pontuacao_jogador1 = 0
+        pontuacao_jogador2 = 0
+        
+        biblioteca_de_informação = [{'Nome': jogador1, 'Pontuação': pontuacao_jogador1 }, {'Nome': jogador2, 'Pontuação': pontuacao_jogador2 }]
+
         # Parte 2 - Inciar o jogo -
         print(f'''
         Ronda número {i}
@@ -30,3 +35,4 @@ if __name__ == '__main__':
 
         jogada(primeira_jogada, segunda_jogada)
 
+        print(biblioteca_de_informação)
