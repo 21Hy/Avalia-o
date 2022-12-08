@@ -5,23 +5,14 @@
 def mesmo_tamanho(lista1, lista2):
     if len(lista1) == len(lista2):
         return True
-
+    
 # exercicio 1, b)
 def valores_repetidos(lista):
-    lista_retorno = []
     nova_lista = []
     for elemento in lista:
-        if elemento not in lista_retorno:
-            lista_retorno.append(elemento)
-        else: 
+        if lista.count(elemento)> 1 and elemento not in nova_lista:
             nova_lista.append(elemento)
     return nova_lista
-
-def remover_repetidos(lista):
-    lista_1 = []
-    for x in lista:
-        if lista.count(x)> 1 and x not in lista_1:
-     return lista_1
 
 # exercicio 1, c)
 def soma_do_primeiro_e_ultimo(lista): # dúvida, receber em números inteiros ou float em functions???
