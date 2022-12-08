@@ -16,22 +16,34 @@ def valores_repetidos(lista):
 
 # exercicio 1, c)
 def soma_do_primeiro_e_ultimo(lista):
+    # verificação de números in or float
     nova_lista = []
     for elemento in lista:
         if type(elemento) == (int or float):
             nova_lista.append(elemento)
+    # soma do primeiro e último
     return nova_lista[0] + nova_lista[len(nova_lista) - 1]
 
 # exercicio 1, d)
-def soma_de_duas_listas_com_o_mesmo_indice(lista1, lista2): # dúvida, receber em números inteiros ou float em functions???
-    if len(lista1) > len(lista2):
+def soma_de_duas_listas_com_o_mesmo_indice(lista1, lista2):
+    # verificação de númereros int or float
+    nova_lista1 = []
+    nova_lista2 = []
+    for elemento in lista1:
+        if type(elemento) == (int or float):
+            nova_lista1.append(elemento)
+    for elemento in lista2:
+        if type(elemento) == (int or float):
+            nova_lista2.append(elemento)
+    # soma das duas listas
+    if len(nova_lista1) > len(nova_lista2):
         retorno = []
-        for i in range(len(lista2)):
-            retorno.append(lista1[i] + lista2[i])
+        for i in range(len(nova_lista2)):
+            retorno.append(nova_lista1[i] + nova_lista2[i])
     else: 
         retorno = []
-        for i in range(len(lista1)):
-            retorno.append(lista1[i] + lista2[i])
+        for i in range(len(nova_lista1)):
+            retorno.append(nova_lista1[i] + nova_lista2[i])
     return retorno
 
 # exercicio 1, e)
