@@ -15,8 +15,12 @@ def valores_repetidos(lista):
     return nova_lista
 
 # exercicio 1, c)
-def soma_do_primeiro_e_ultimo(lista): # dúvida, receber em números inteiros ou float em functions???
-    return lista[0] + lista[len(lista) - 1]
+def soma_do_primeiro_e_ultimo(lista):
+    nova_lista = []
+    for elemento in lista:
+        if type(elemento) == (int or float):
+            nova_lista.append(elemento)
+    return nova_lista[0] + nova_lista[len(nova_lista) - 1]
 
 # exercicio 1, d)
 def soma_de_duas_listas_com_o_mesmo_indice(lista1, lista2): # dúvida, receber em números inteiros ou float em functions???
