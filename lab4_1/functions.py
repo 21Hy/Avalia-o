@@ -56,7 +56,13 @@ def retornar_string(lista):
 
 # exercicio 1, f)
 def media_dos_valores_da_lista(lista):
-    return sum(lista)/ len(lista)
+    # verificação de números in or float
+    nova_lista = []
+    for elemento in lista:
+        if type(elemento) == (int or float):
+            nova_lista.append(elemento)
+    # média dos valores
+    return sum(nova_lista)/ len(nova_lista)
 
 # exercicio 1, g)
 def elementos_arredondados(lista):
