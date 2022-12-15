@@ -1,38 +1,66 @@
-# lab4_2 Jogo Pedra, Papel ou Tesoura.
-# Aluno: 30011447
-
 from functions import *
 if __name__ == '__main__':
 
-    # Parte 1 - Registar jogador - 
     print('''
-            --------Bem vindo ao jogo--------
-            Este é uma versão do jogo de pedra papel ou tesoura, 
-            terá um total de 10 rondas, por ronda uma vitória corres-
-            ponde a 5 pontos, uma derrota a 0 pontos e empate 1 ponto. 
-             ''')
-    jogador1 = input('Nome do primeiro jogador: ')
-    jogador2 = input('Nome do segundo jogador: ')
+        ------Bem vindo ao meu jogo------''')
+    
+    biblioteca_de_informação = [{'Nome': 'jogador1', 'Pontuação': 0}, {'Nome': 'jogador2', 'Pontuação': 0 }]
 
-    for i in range(1, 10):
+    while True:
+        instrucao_principal = input('''
+        -----Menu Principal-----
+        [RJ] para Registar jogadores
+        [IJ] para Inciar Jogo 
+        [VP] para Visualizar Pontuação
+        [S] para Sair
+        :  ''').upper()
 
+        if instrucao_principal == 'RJ':
+            print('''
+        -Menu de Registo-''')
+            biblioteca_de_informação[0]['Nome'] = input('''
+        Registar como jogador 1: ''')
+            biblioteca_de_informação[1]['Nome'] = input('''
+        Registar como jogador 2: ''')
 
-        pontuacao_jogador1 = 0
-        pontuacao_jogador2 = 0
-        
-        biblioteca_de_informação = [{'Nome': jogador1, 'Pontuação': pontuacao_jogador1 }, {'Nome': jogador2, 'Pontuação': pontuacao_jogador2 }]
+        elif instrucao_principal == 'IJ':
+            print(f'''
+        -Menu de Jogo-
+        Jogador 1: {biblioteca_de_informação[0]['Nome']}
+        Jogador 2: {biblioteca_de_informação[1]['Nome']} ''')
+            while True:
+                escolha1 = input(f'''
+        Digita a sua jogada {biblioteca_de_informação[0]['Nome']} 
+        [pedra/papel/tesoura]: ''').lower()
 
-        # Parte 2 - Inciar o jogo -
-        print(f'''
-        Ronda número {i}
-        Jogador 1: "{jogador1}" 
-        jogador 2: "{jogador2}
-        Para sair: "sair"
-        Visualizar a pontuação: VP''')
-        
-        primeira_jogada = input(f'Faz a tua jogada {jogador1} [Pedra/Papel/Tesoura]: ').lower()
-        segunda_jogada = input(f'Faz a tua jogada {jogador2} [Pedra/Papel/Tesoura]: ').lower()
+                escolha2 = input(f'''
+        Digita a sua jogada {biblioteca_de_informação[1]['Nome']} 
+        [pedra/papel/tesoura]: ''').lower()
 
-        jogada(primeira_jogada, segunda_jogada)
+                if (confirmar_input(escolha1) and confirmar_input(escolha2)):
+                    resultado_da_escolha1, resultado_da_escolha2 = decidir([escolha1, escolha2])
+                    biblioteca_de_informação[0]['Pontuação'] += resultado_da_escolha1
+                    biblioteca_de_informação[1]['Pontuação'] += resultado_da_escolha2
+                    break
+                else:
+                    print('''
+            ...Instrução Inválida...
+            ''')
 
-        print(biblioteca_de_informação)
+        elif instrucao_principal == 'VP': 
+            print(f'''
+        -Menu de Pontuação-
+        {biblioteca_de_informação}
+        ...
+        Jogador 1: {biblioteca_de_informação[0]['Nome']}, Pontuação: {biblioteca_de_informação[0]['Pontuação']}
+        Jogador 2: {biblioteca_de_informação[1]['Nome']}, Pontuação: {biblioteca_de_informação[1]['Pontuação']}''')
+
+        elif instrucao_principal == 'S':
+            print('''
+        ------Adeus------''')
+            break
+
+        else:
+            print('''
+            ...Instrução Inválida...
+            ''')
