@@ -10,7 +10,7 @@ def mesmo_tamanho(lista1, lista2):
 def valores_repetidos(lista):
     nova_lista = []
     for elemento in lista:
-        if lista.count(elemento)> 1 and elemento not in nova_lista:
+        if lista.count(elemento) > 1 and elemento not in nova_lista:
             nova_lista.append(elemento)
     return nova_lista
 
@@ -19,7 +19,7 @@ def soma_do_primeiro_e_ultimo(lista):
     # verificação de números in or float
     nova_lista = []
     for elemento in lista:
-        if type(elemento) == (int or float):
+        if ((type(elemento) == int) or (type(elemento) == float)):
             nova_lista.append(elemento)
     # soma do primeiro e último
     return nova_lista[0] + nova_lista[len(nova_lista) - 1]
@@ -30,10 +30,10 @@ def soma_de_duas_listas_com_o_mesmo_indice(lista1, lista2):
     nova_lista1 = []
     nova_lista2 = []
     for elemento in lista1:
-        if type(elemento) == (int or float):
+        if ((type(elemento) == int) or (type(elemento) == float)):
             nova_lista1.append(elemento)
     for elemento in lista2:
-        if type(elemento) == (int or float):
+        if ((type(elemento) == int) or (type(elemento) == float)):
             nova_lista2.append(elemento)
     # soma das duas listas
     if len(nova_lista1) > len(nova_lista2):
@@ -59,7 +59,7 @@ def media_dos_valores_da_lista(lista):
     # verificação de números in or float
     nova_lista = []
     for elemento in lista:
-        if type(elemento) == (int or float):
+        if ((type(elemento) == int) or (type(elemento) == float)):
             nova_lista.append(elemento)
     # média dos valores
     return sum(nova_lista)/ len(nova_lista)
