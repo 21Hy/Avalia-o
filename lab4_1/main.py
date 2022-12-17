@@ -18,7 +18,7 @@ if __name__ == '__main__':
         idade = input('Tem idade entre 25 e 45 anos?[S/N]: ').upper()
         ingles = input('Tem conhecimento de inglês?[S/N]: ').upper()
         python = input('Tem conhecimento de Python?[S/N]: ').upper()
-        if (idade and ingles and python) == 'S':
+        if (idade == 'S') and (ingles == 'S') and (python == 'S'):
             print('Pode candidatar-se à vaga.')
         else:
             print('Não possui os requisitos necessários para se candidatar a esta vagas.')
