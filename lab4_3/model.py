@@ -1,5 +1,1 @@
-# Criação de todos os dicionários necessários
-
-lista_geral = []
-
-                        
+lista_geral = []                 
