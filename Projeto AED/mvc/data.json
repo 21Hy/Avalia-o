@@ -1,0 +1,19 @@
+{
+  "informacao": [
+    {
+      "Username": "luis",
+      "Password": "1111",
+      "Userdata": {}
+    },
+    {
+      "Username": "Jorge",
+      "Password": "2222",
+      "Userdata": {}
+    },
+    {
+      "Username": "Ronaldo",
+      "Password": "1111",
+      "Userdata": {}
+    }
+  ]
+}
