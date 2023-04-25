@@ -42,18 +42,18 @@ class Controller:
         return self.data
     
     def adicionar_cliente(self, data, username, password):
-        data['informacao'].append({'Username':username, 'Password':password, 'Userdata': {}})
+        data['Clientes'].append({'Username':username, 'Password':password, 'Userdata': {}})
         self.escrever_ficheiro_json('data.json',data)
 
     # para o sign-up
     def procurar_username(self, data, username):
-        for elemento in data['informacao']:
+        for elemento in data['Clientes']:
             if elemento['Username'] == username:
                 return False
         return True
     # para o login enter
     def login_validacao(self, data, username, password):
-        for elemento in data['informacao']:
+        for elemento in data['Clientes']:
             if (elemento['Username'] == username) and (elemento['Password'] == password):
                 return True
         return False
