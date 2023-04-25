@@ -18,18 +18,18 @@ class View:
         self.un_fr = tk.Frame(self.root)
         self.un_lb = tk.Label(self.un_fr, text='Username') 
         self.un_et_str = tk.StringVar()
-        self.un_et = tk.Entry(self.un_fr, width=30, textvariable=self.un_et_str, bg='#c4c2bc') # hex color picker
+        self.un_et = tk.Entry(self.un_fr, width=30, textvariable=self.un_et_str, bg='#b2bdd9') # hex color picker
         # password frame
         self.pw_fr = tk.Frame(self.root, pady=10)
         self.pw_lb = tk.Label(self.pw_fr, text='Password') 
         self.pw_et_str = tk.StringVar()
-        self.pw_et = tk.Entry(self.pw_fr, width=30,textvariable=self.pw_et_str, show='*', bg='#c4c2bc')
+        self.pw_et = tk.Entry(self.pw_fr, width=30,textvariable=self.pw_et_str, show='*', bg='#b2bdd9')
         # Entry frame
         self.et_frame = tk.Frame(self.root)
-        self.et_bt_in = tk.Button(self.et_frame, text="Enter", width=25)
+        self.et_bt_in = tk.Button(self.et_frame, text="Enter", width=25, bg='#c4c2bc')
         self.et_bt_in.config(command= lambda: self.controller.login_enter_click(self.data,self.un_et_str, self.pw_et))
         self.et_lb = tk.Label(self.et_frame)
-        self.et_bt_sp = tk.Button(self.et_frame, text="Don´t have an acount yet? Sign up here", font=('','7'))
+        self.et_bt_sp = tk.Button(self.et_frame, text="Don´t have an acount yet? Sign up here", font=('','7'), bg='#c4c2bc',width=29)
         self.et_bt_sp.config(command= lambda: self.sign_up_window(self.root))
         # packs
         self.main_label.pack()
@@ -54,21 +54,21 @@ class View:
         self.main_label = tk.Label(self.master, text='Sign-up', font='bold', pady=20)
         # username frame
         self.un_fr = tk.Frame(self.master)
-        self.un_lb = tk.Label(self.un_fr, text='Username') # hex color picker
+        self.un_lb = tk.Label(self.un_fr, text='Username') 
         self.un_et_str = tk.StringVar()
-        self.un_et = tk.Entry(self.un_fr, width=30, textvariable=self.un_et_str, bg='#c4c2bc')
+        self.un_et = tk.Entry(self.un_fr, width=30, textvariable=self.un_et_str, bg='#b2bdd9') # hex color picker
         # password frame
         self.pw_fr = tk.Frame(self.master, pady=10)
-        self.pw_lb = tk.Label(self.pw_fr, text='Password') # hex color picker
+        self.pw_lb = tk.Label(self.pw_fr, text='Password') 
         self.pw_et_str = tk.StringVar()
-        self.pw_et = tk.Entry(self.pw_fr, width=30,textvariable=self.pw_et_str, show='*', bg='#c4c2bc')
+        self.pw_et = tk.Entry(self.pw_fr, width=30,textvariable=self.pw_et_str, show='*', bg='#b2bdd9')
         # password frame
-        self.pw_lb_2 = tk.Label(self.pw_fr, text='Confirm password') # hex color picker
+        self.pw_lb_2 = tk.Label(self.pw_fr, text='Confirm password') 
         self.pw_et_str_2 = tk.StringVar()
-        self.pw_et_2 = tk.Entry(self.pw_fr, width=30,textvariable=self.pw_et_str_2, show='*', bg='#c4c2bc')
+        self.pw_et_2 = tk.Entry(self.pw_fr, width=30,textvariable=self.pw_et_str_2, show='*', bg='#b2bdd9')
         # Entry frame
         self.et_fr = tk.Frame(self.master)
-        self.et_bt_in = tk.Button(self.et_fr, text="Enter", width=25)
+        self.et_bt_in = tk.Button(self.et_fr, text="Enter", width=25, bg='#c4c2bc')
         self.et_bt_in.config(command=lambda:self.controller.sign_up_click(self.data,self.un_et_str,self.pw_et_str, self.pw_et_str_2))
         # packs
         self.main_label.pack()
