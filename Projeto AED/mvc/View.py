@@ -63,7 +63,7 @@ class View:
         self.pw_et_str = tk.StringVar()
         self.pw_et = tk.Entry(self.pw_fr, width=30,textvariable=self.pw_et_str, show='*', bg='#c4c2bc')
         # password frame
-        self.pw_lb_2 = tk.Label(self.pw_fr, text='Confirm assword') # hex color picker
+        self.pw_lb_2 = tk.Label(self.pw_fr, text='Confirm password') # hex color picker
         self.pw_et_str_2 = tk.StringVar()
         self.pw_et_2 = tk.Entry(self.pw_fr, width=30,textvariable=self.pw_et_str_2, show='*', bg='#c4c2bc')
         # Entry frame
