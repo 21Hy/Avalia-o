@@ -18,7 +18,11 @@ class Controller:
         return messagebox.showerror(titulo, texto)
     
     def sign_up_click(self,data,username,pw_1,pw_2):
-        if (pw_1.get() == pw_2.get()) and (self.procurar_username(data, username.get())):
+        if (
+            (pw_1.get() == pw_2.get()) and 
+            (self.procurar_username(data, username.get())) and
+            (self.verificar_inputs_sign_up(username.get(),pw_1.get()))
+            ):
             self.adicionar_cliente(data,username.get(),pw_1.get())
             print('Deu certo o sign up')
         else:
@@ -54,7 +58,10 @@ class Controller:
     # para o login enter
     def login_validacao(self, data, username, password):
         for i in range(len(data['Clientes'])):
-            if (data['Clientes'][i]['Username'] == username) and (data['Clientes'][i]['Password'] == password):
+            if (
+                (data['Clientes'][i]['Username'] == username) and 
+                (data['Clientes'][i]['Password'] == password)
+                ):
                 self.user_data = data['Clientes'][i]['Userdata']
                 self.data_indice = i
                 return True
@@ -62,3 +69,12 @@ class Controller:
     
     def guardar_alteracoes(self):
         self.data['Cientes'][self.data_indice]['Userdata'] = self.user_data
+
+    def verificar_inputs_sign_up(self,username,password):
+        if (
+            (len(username) >= 4) and
+            (len(password) >= 4)
+            ):
+            return True
+        else:
+            return False
