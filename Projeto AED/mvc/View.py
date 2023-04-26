@@ -8,8 +8,11 @@ class View:
         self.root = tk.Tk()
         self.controller = Controller()
         self.data = self.controller.ler_ficheiro_json('data.json')
+        self.user_data = None # data do cada user depois do login
+        self.data_indice = None # irá guardar o indice em que o user se encontra dentro da lista de dicts
         self.login_window()
         self.root.mainloop()
+
 
     def login_window(self):
         self.controller.window_geometry(self.root)
