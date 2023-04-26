@@ -20,13 +20,13 @@ class Controller:
     def sign_up_click(self,data,username,pw_1,pw_2):
         if (pw_1.get() == pw_2.get()) and (self.procurar_username(data, username.get())):
             self.adicionar_cliente(data,username.get(),pw_1.get())
-            print('Deu certo também')
+            print('Deu certo o sign up')
         else:
             self.menssagem_de_erro('Erro', 'Username existente ou passord incorreta.')
 
     def login_enter_click(self,data,username,password):
         if self.login_validacao(data,username.get(),password.get()): # alterar
-            print('Deu certo')
+            print('Deu certo o login')
         else:
             self.menssagem_de_erro('Erro','Username ou password incorretos')
 
@@ -44,7 +44,7 @@ class Controller:
     def adicionar_cliente(self, data, username, password):
         data['Clientes'].append({'Username':username, 'Password':password, 'Userdata': {}})
         self.escrever_ficheiro_json('data.json',data)
-
+        self.login_validacao(data,username,password)
     # para o sign-up
     def procurar_username(self, data, username):
         for elemento in data['Clientes']:
@@ -53,7 +53,12 @@ class Controller:
         return True
     # para o login enter
     def login_validacao(self, data, username, password):
-        for elemento in data['Clientes']:
-            if (elemento['Username'] == username) and (elemento['Password'] == password):
+        for i in range(len(data['Clientes'])):
+            if (data['Clientes'][i]['Username'] == username) and (data['Clientes'][i]['Password'] == password):
+                self.user_data = data['Clientes'][i]['Userdata']
+                self.data_indice = i
                 return True
         return False
+    
+    def guardar_alteracoes(self):
+        self.data['Cientes'][self.data_indice]['Userdata'] = self.user_data
