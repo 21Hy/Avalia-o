@@ -1,38 +1,29 @@
 import json
 from tkinter import messagebox
-import tkinter as tk
 
 class Controller:
-
-    def window_geometry(self, master):
+    def __init__(self, master):
         self.master = master
-        # geometria centrada da janela
-        self.w=300; self.h=300
-        self.screen_width = self.master.winfo_screenwidth()
-        self.screen_height = self.master.winfo_screenheight()
-        self.x=(self.screen_width/2)-(self.w/2)
-        self.y=(self.screen_height/2)-(self.h/2)
-        self.master.geometry('%dx%d+%d+%d' % (self.w, self.h, self.x, self.y))
-
-    def menssagem_de_erro(self, titulo, texto):
-        return messagebox.showerror(titulo, texto)
+        self.data = self.ler_ficheiro_json('data.json')
+        self.user_data = None # data do user depois do login
+        self.data_indice = None # irá guardar o indice em que o user se encontra dentro da lista de dicts
     
-    def sign_up_click(self,data,username,pw_1,pw_2):
+    def sign_up_click(self,username,pw_1,pw_2,nif):
         if (
             (pw_1.get() == pw_2.get()) and 
-            (self.procurar_username(data, username.get())) and
-            (self.verificar_inputs_sign_up(username.get(),pw_1.get()))
+            (self.procurar_username(username.get())) and
+            (self.verificar_inputs_sign_up(username.get(),pw_1.get(),nif.get()))
             ):
-            self.adicionar_cliente(data,username.get(),pw_1.get())
+            self.adicionar_cliente(username.get(),pw_1.get(),nif.get())
             print('Deu certo o sign up')
         else:
-            self.menssagem_de_erro('Erro', 'Username existente ou passord incorreta.')
+            self.produzir_msg_erro('Erro', 'Username existente ou passord incorreta.')
 
-    def login_enter_click(self,data,username,password):
-        if self.login_validacao(data,username.get(),password.get()): # alterar
+    def login_enter_click(self, username, password, nif):
+        if self.login_validacao(username.get(), password.get(), nif.get()):
             print('Deu certo o login')
         else:
-            self.menssagem_de_erro('Erro','Username ou password incorretos')
+            self.produzir_msg_erro('Erro','Username ou password incorretos')
 
     def escrever_ficheiro_json(self,nome_ficheiro, data):
         self.json_string = json.dumps(data, indent = 2)
@@ -45,24 +36,25 @@ class Controller:
             self.data = json.load(f)
         return self.data
     
-    def adicionar_cliente(self, data, username, password):
-        data['Clientes'].append({'Username':username, 'Password':password, 'Userdata': {}})
-        self.escrever_ficheiro_json('data.json',data)
-        self.login_validacao(data,username,password)
+    def adicionar_cliente(self, username, password, nif):
+        self.data['Clientes'].append({'Username':username, 'Password':password,'Nif':nif,'Userdata': {}})
+        self.escrever_ficheiro_json('data.json',self.data)
+        self.login_validacao(username,password,nif)
     # para o sign-up
-    def procurar_username(self, data, username):
-        for elemento in data['Clientes']:
+    def procurar_username(self, username):
+        for elemento in self.data['Clientes']:
             if elemento['Username'] == username:
                 return False
         return True
     # para o login enter
-    def login_validacao(self, data, username, password):
-        for i in range(len(data['Clientes'])):
+    def login_validacao(self,username, password, nif):
+        for i in range(len(self.data['Clientes'])):
             if (
-                (data['Clientes'][i]['Username'] == username) and 
-                (data['Clientes'][i]['Password'] == password)
+                (self.data['Clientes'][i]['Username'] == username) and 
+                (self.data['Clientes'][i]['Password'] == password) and
+                (self.data['Clientes'][i]['Nif'] == nif)
                 ):
-                self.user_data = data['Clientes'][i]['Userdata']
+                self.user_data = self.data['Clientes'][i]['Userdata']
                 self.data_indice = i
                 return True
         return False
@@ -70,11 +62,17 @@ class Controller:
     def guardar_alteracoes(self):
         self.data['Cientes'][self.data_indice]['Userdata'] = self.user_data
 
-    def verificar_inputs_sign_up(self,username,password):
+    def verificar_inputs_sign_up(self,username,password,nif):
         if (
             (len(username) >= 4) and
-            (len(password) >= 4)
+            (len(password) >= 4) and
+            (len(nif) == 9)
             ):
             return True
         else:
             return False
+        
+    def produzir_msg_erro(self, titulo, texto):
+        # produz uma mensagem de erro numa janela oferecida pelo módulo tkinter
+        return messagebox.showerror(titulo, texto)
+    
