@@ -3,17 +3,20 @@
     {
       "Username": "luis",
       "Password": "1111",
-      "Userdata": {}
+      "Nif": "123456789",
+      "Userdata": []
     },
     {
       "Username": "Jorge",
       "Password": "2222",
-      "Userdata": {}
+      "Nif": "023456789",
+      "Userdata": []
     },
     {
       "Username": "Ronaldo",
       "Password": "1111",
-      "Userdata": {}
+      "Nif": "223456789",
+      "Userdata": []
     }
   ]
 }
