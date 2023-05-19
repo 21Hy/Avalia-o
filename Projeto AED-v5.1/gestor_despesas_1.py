@@ -5,23 +5,23 @@ class Ver():
     def __init__(self):
         self.gestor_despesas()
         
-    def modificar_geometria(self, largura, altura):
+    def modificar_geometria(self, largura, altura,widget):
         # geometria centrada da janela
         w=largura; h=altura
-        screen_width = self.master.winfo_screenwidth()
-        screen_height = self.master.winfo_screenheight()
+        screen_width = widget.winfo_screenwidth()
+        screen_height = widget.winfo_screenheight()
         x = (screen_width/2)-(w/2)
-        y = (screen_height/2)-(h/2)
-        self.master.geometry('%dx%d+%d+%d' % (w, h, x, y))
+        y = (screen_height/2-50)-(h/2)
+        widget.geometry('%dx%d+%d+%d' % (w, h, x, y))
 
     def gestor_despesas(self):
         self.master = tk.Tk()
         self.master.resizable(False,False)
-        self.modificar_geometria(1200,500)
-        self.master.config(bg='#A9907E')
+        self.modificar_geometria(1200,600,self.master)
+        self.master.config(bg='light blue')
 
         # defenir a grid:
-        for index in [0,1,2,3,4,5,6,7,8,9,10,11,12,13]:
+        for index in [0,1,2,3,4,5,6,7]:
             self.master.columnconfigure(index,weight= 1,uniform='a')
             self.master.rowconfigure(index,weight=1,uniform='a')
 
@@ -29,9 +29,9 @@ class Ver():
         #.................. Tabela/Gráfico Widget
         self.tabela_grafico_book = ttk.Notebook(self.master)
         self.tabela_grafico_book.grid(
-            row=0,rowspan=10,column=2,columnspan=8,padx=(10, 10),pady=(20, 10),sticky="nsew"
+            row=0,rowspan=8,column=0,columnspan=6,padx=(10, 10),pady=(20, 10),sticky="nsew"
         )
-        #......... gráfico
+        #.................. gráfico
         self.grafico_widget = ttk.Frame(
             self.tabela_grafico_book, padding=(10, 10)
         )
@@ -41,132 +41,165 @@ class Ver():
         )
         self.grafico_widget_label_1.pack()
 
-        #......... tabela
+        #.................. Tabela
         self.tabela_widget = ttk.Frame(
             self.tabela_grafico_book, padding=(10, 10)
         )
         self.tabela_grafico_book.add(self.tabela_widget, text='Tabela')
+        
+        #.................. User Widget
+        self.user_widget = ttk.Frame(self.master)
+        self.user_widget.grid(
+            row=0,rowspan=8,column=6,columnspan=2,padx=(10, 10),pady=(20, 10),sticky="nsew"
+        )
+        self.user_widget_b= tk.Button(
+            self.user_widget,text='estou aqui', command=self.adicionar_despesas
+        )
+        self.user_widget_b.pack()
+        self.user_widget_b2= tk.Button(
+            self.user_widget,text='estou aqui', command=self.adicionar_limite_mensal
+        )
+        self.user_widget_b2.pack()
+        self.master.mainloop()
 
-        #.................. Filtros Widget
-        self.filtros_widget = ttk.LabelFrame(text="Filtros", padding=(20, 10))
-        self.filtros_widget.grid(
-            row=0,rowspan=14,column=0,columnspan=2,padx=(10, 10),pady=(20, 10),sticky="nsew"
+    def adicionar_despesas(self):
+        self.top= tk.Toplevel()
+        self.modificar_geometria(300,300,self.top)
+        # defenir a grid:
+        for index in [0,1]:
+            self.top.columnconfigure(index,weight= 1,uniform='a')
+        for index in [0,1,2,3,4,5,6]:
+            self.top.rowconfigure(index,weight=1,uniform='a')
+        # Frame 1
+        self.top_frame1 = ttk.Frame(
+            self.top, style='self.top_frame1.TFrame'
         )
-        self.filtros_widget_radio_1 = ttk.Radiobutton(
-            self.filtros_widget, text="Decresc.", value=1
+        self.top_frame1.grid(
+            row=0,rowspan=1,column=0,columnspan=2,sticky="nsew"
         )
-        self.filtros_widget_radio_1.grid(pady=5, sticky='nswe')
-        self.filtros_widget_radio_2 = ttk.Radiobutton(
-            self.filtros_widget, text="Cresc.", value=1
+        self.top_frame1_label = ttk.Label(
+            self.top_frame1,text='Categoria: ',font=('Arial', 12),background ='#156969'
         )
-        self.filtros_widget_radio_2.grid(pady=5,sticky='nswe')
-        self.filtros_widget_radio_3 = ttk.Radiobutton(
-            self.filtros_widget, text="A...Z", value=1
+        self.top_frame1_label.grid(
+            row=0,column=0,sticky="nsew"
         )
-        self.filtros_widget_radio_3.grid(pady=5,sticky='nswe')
-        self.filtros_widget_button_1 = ttk.Button(
-            self.filtros_widget, text='Enter'
+        self.top_frame1_entry = ttk.Combobox(
+            self.top_frame1,font=('Arial', 12)
         )
-        self.filtros_widget_button_1.grid(pady=5,sticky="w")
-        self.filtros_widget_label_1 = ttk.Label(
-            self.filtros_widget, text='Categoria:'
+        self.top_frame1_entry.grid(
+            row=0,column=2,sticky="sew"
         )
-        self.filtros_widget_label_1.grid(pady=5,sticky='w')
-        self.filtros_widget_entry_1 = ttk.Entry(self.filtros_widget)
-        self.filtros_widget_entry_1.grid(pady=5,sticky="w")
-        self.filtros_widget_label_2 = ttk.Label(
-            self.filtros_widget, text='Data:'
+        # Frame 2
+        self.top_frame2 = ttk.Frame(
+            self.top, style='self.top_frame2.TFrame'
         )
-        self.filtros_widget_label_2.grid(pady=5,sticky='w')
-        self.filtros_widget_entry_2 = ttk.Entry(self.filtros_widget)
-        self.filtros_widget_entry_2.grid(pady=5,sticky="w")
-        self.filtros_widget_button_2 = ttk.Button(
-            self.filtros_widget, text='Enter'
+        self.top_frame2.grid(
+            row=1,rowspan=1,column=0,columnspan=2,sticky="nsew"
         )
-        self.filtros_widget_button_2.grid(pady=5,sticky="nesw")
-
-
-
-        #.................. Despesas Widget
-        self.despesas_widget = ttk.Frame(self.master, style='self.despesas_widget.TFrame')
-        self.despesas_widget.grid(
-            row=0,rowspan=14,column=10,columnspan=4,padx=(10, 10),pady=(20, 10),sticky="nsew"
+        self.top_frame2_label = ttk.Label(
+            self.top_frame2,text='Data: ',font=('Arial', 12),background ='#156969'
         )
-        self.despesas_widget_label_1 = ttk.Label(
-            self.despesas_widget,text='Adicionar Despesas',font=('Arial', 18)
+        self.top_frame2_label.grid(
+            row=0,column=0,sticky="nsew",ipadx=18
         )
-        self.despesas_widget_label_1.pack(pady=5)
-        self.despesas_widget_label_2 = ttk.Label(
-            self.despesas_widget,text='Categoria:',font=('Arial', 12)
+        self.top_frame2_entry = ttk.Entry(
+            self.top_frame2,font=('Arial', 12)
         )
-        self.despesas_widget_label_2.pack(pady=10)
-
-        self.despesas_widget_entry_1 = ttk.Combobox(
-            self.despesas_widget,font=('Arial', 12)
+        self.top_frame2_entry.grid(
+            row=0,column=2,sticky="sew",ipadx=9
         )
-        self.despesas_widget_entry_1.pack(pady=3)
-        self.despesas_widget_label_3 = ttk.Label(
-            self.despesas_widget,text='Valor(€):',font=('Arial', 12)
+        # Frame 3
+        self.top_frame3 = ttk.Frame(
+            self.top, style='self.top_frame3.TFrame'
         )
-        self.despesas_widget_label_3.pack(pady=5)
-        self.despesas_widget_entry_2 = ttk.Entry(
-            self.despesas_widget,font=('Arial', 12)
+        self.top_frame3.grid(
+            row=2,column=0,columnspan=2,sticky="nsew"
         )
-        self.despesas_widget_entry_2.pack(pady=3)
-        self.despesas_widget_label_4 = ttk.Label(
-            self.despesas_widget,text='Data:',font=('Arial', 12)
+        self.top_frame3_label = ttk.Label(
+            self.top_frame3,text='Valor(€):',font=('Arial', 12),background ='#156969'
         )
-        self.despesas_widget_label_4.pack(pady=5)
-        self.despesas_widget_entry_3 = ttk.Entry(
-            self.despesas_widget,font=('Arial', 12)
+        self.top_frame3_label.grid(
+            row=0,column=0,sticky="nsew",ipadx=9
         )
-        self.despesas_widget_entry_3.pack(pady=3)
-        self.despesas_widget_label_5 = ttk.Label(
-            self.despesas_widget,text='Descrição:',font=('Arial', 12)
+        self.top_frame3_entry = ttk.Entry(
+            self.top_frame3,font=('Arial', 12)
         )
-        self.despesas_widget_label_5.pack(pady=5)
-        self.despesas_widget_entry_4 = tk.Text(
-            self.despesas_widget,font=('Arial', 10),width=26, height=2
+        self.top_frame3_entry.grid(
+            row=0,column=2,sticky="sew",ipadx=9
         )
-        self.despesas_widget_entry_4.pack(pady=3)
-        self.despesas_widget_button_1 = ttk.Button(
-            self.despesas_widget, text='Enter'
+        # Frame 4
+        self.top_frame4 = ttk.Frame(
+            self.top, style='self.top_frame4.TFrame'
         )
-        self.despesas_widget_button_1.pack(pady=5, ipadx=55)
-        #..... Limite Mensal
-        self.despesas_widget_frame1 = ttk.LabelFrame(
-            self.despesas_widget,text='Limite Mensal',width=200,height=150,padding=(10, 10)
+        self.top_frame4.grid(
+            row=3,column=0,rowspan=2,columnspan=2,sticky="nsew"
         )
-        self.despesas_widget_frame1.pack(pady=5)
-        self.despesas_widget_label_6 = ttk.Label(
-            self.despesas_widget_frame1,text='Valor(€):',font=('Arial', 12)
+        self.top_frame4_label = ttk.Label(
+            self.top_frame4,text='Descrição:',font=('Arial', 12),background ='#156969'
         )
-        self.despesas_widget_label_6.grid(sticky='w')
-        self.despesas_widget_entry_5 = ttk.Entry(  
-            self.despesas_widget_frame1,font=('Arial', 10)
+        self.top_frame4_label.grid(
+            row=0,column=0,sticky="sw",pady=(20,0)
         )
-        self.despesas_widget_entry_5.grid(sticky='e')
-        self.despesas_widget_button_2 = ttk.Button(
-            self.despesas_widget_frame1, text='Enter'
+        # Frame 5
+        self.top_frame5 = ttk.Frame(
+            self.top, style='self.top_frame1.TFrame'
         )
-        self.despesas_widget_button_2.grid(sticky="wnse")
-
-
-
-        #.................. Dicas Widget
-        self.dicas_widget = ttk.LabelFrame(text="Dicas", padding=(20, 10))
-        self.dicas_widget.grid(
-            row=10,rowspan=4,column=2,columnspan=8,padx=(10, 10),pady=(20, 10),sticky="nsew"
+        self.top_frame5.grid(
+            row=4,column=0,rowspan=1,columnspan=2,sticky="nsew"
         )
-        self.dicas_widget_label_1 = ttk.Label(
-            self.dicas_widget,text='Estou aqui'
+        self.top_frame5_entry = tk.Text(
+            self.top_frame5
         )
-        self.dicas_widget_label_1.pack()
-
+        self.top_frame5_entry.grid(
+            row=0,column=0,sticky="n"
+        )
+        # Frame 6
+        self.top_frame6 = tk.Frame(
+            self.top,bg='#518585'
+        )
+        self.top_frame6.grid(
+            row=5,column=0,rowspan=1,columnspan=2,sticky="nsew"
+        )
+        self.top_frame6_button = tk.Button(
+            self.top_frame6, text='Adicionar',font=('Arial', 12),command=self.eliminar
+        )
+        self.top_frame6_button.pack(ipadx=102, ipady=5,pady=5)
+        # Frame 7
+        self.top_frame7 = tk.Frame(
+            self.top,bg='#518585'
+        )
+        self.top_frame7.grid(
+            row=6,column=0,rowspan=1,columnspan=2,sticky="nsew"
+        )
+        self.top_frame7_button = tk.Button(
+            self.top_frame7, text='Voltar',font=('Arial', 12),command=self.top.destroy
+        )
+        self.top_frame7_button.pack(ipadx=115, ipady=5,pady=5)
+        
         #.................. Widegts Styling
         self.style = ttk.Style()
-        self.style.configure('self.despesas_widget.TFrame', background = '#675D50')
+        self.style.configure('self.top_frame1.TFrame',background ='#518585')
+        self.style.configure('self.top_frame2.TFrame',background ='#518585')
+        self.style.configure('self.top_frame3.TFrame',background ='#518585')
+        self.style.configure('self.top_frame4.TFrame',background ='#518585')
+        self.style.configure('self.top_frame6.TFrame',background ='#518585')
+        self.style.configure('self.top_frame7.TFrame',background ='#518585')
 
-        self.master.mainloop()
+
+    def eliminar(self):
+        self.top_frame1_entry.delete(0, 'end')
+        self.top_frame2_entry.delete(0, 'end')
+        self.top_frame3_entry.delete(0, 'end')
+        self.top_frame5_entry.delete(0, 'end')
+
+    def adicionar_limite_mensal(self):
+        self.top2= tk.Toplevel()
+        self.modificar_geometria(400,200,self.top2)
+
+        self.slide = ttk.Scale(self.top2)
+        self.slide.pack()
+        self.top2_label = ttk.Label(self.top2, text=self.slide.get())
+        self.top2_label.pack()
+
 
 Ver()
